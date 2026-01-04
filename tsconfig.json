@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "lib": ["ES2015", "ES2017", "ES2020"],
+    "target": "ES2015",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "outDir": "./temp/",
+    "moduleResolution": "node",
+    "strict": false,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "db://*": ["./assets/*"]
+    }
+  },
+  "include": [
+    "assets/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "library",
+    "local",
+    "temp",
+    "settings"
+  ]
+}
+

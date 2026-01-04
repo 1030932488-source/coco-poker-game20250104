@@ -1,0 +1,20 @@
+{
+  "name": "coco-poker",
+  "version": "1.0.0",
+  "description": "Cocos Creator 纸牌消除游戏",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cocos-creator",
+    "card-game",
+    "poker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "creator": {
+    "version": "3.8.8"
+  },
+  "uuid": "2ec301b8-31ea-4029-9c67-9969698a7b66"
+}

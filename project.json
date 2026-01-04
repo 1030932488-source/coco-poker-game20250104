@@ -1,0 +1,35 @@
+{
+  "engine": "3.8.0",
+  "id": "coco-poker",
+  "isNew": false,
+  "readonly": false,
+  "title": "Coco Poker",
+  "excludeScenes": [],
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": true,
+    "upsideDown": true
+  },
+  "webOrientation": "portrait",
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "mergeStartScene": false,
+  "startScene": "db://assets/scenes/GameScene.fire",
+  "packageName": "com.example.cocopoker",
+  "jsList": [],
+  "groupList": [],
+  "collisionMatrix": [
+    [
+      true
+    ]
+  ],
+  "excluded-modules": [],
+  "design-resolution-width": 1080,
+  "design-resolution-height": 2080,
+  "fit-width": false,
+  "fit-height": true,
+  "use-project-settings": true,
+  "start-scene": "db://assets/scenes/GameScene.fire"
+}
+

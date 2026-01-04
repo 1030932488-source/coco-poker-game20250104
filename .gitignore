@@ -1,0 +1,26 @@
+# Cocos Creator
+library/
+local/
+temp/
+settings/
+build/
+profiles/
+
+# Node
+node_modules/
+package-lock.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
