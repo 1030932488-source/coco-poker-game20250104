@@ -123,18 +123,25 @@ export class CardView extends Component {
      * 卡牌点击事件
      */
     private _onCardClick(event: EventTouch): void {
-        console.log('[CardView._onCardClick] 点击了卡牌!',
-            'ID:', this._cardModel?.id,
-            '点数:', this._cardModel?.face,
-            'isFaceUp:', this._cardModel?.isFaceUp);
+        const nodeName = this.node.parent?.name || 'Unknown';
+        console.log(`[CardView._onCardClick] >>> [${nodeName}] 节点被点击! ID:`, this._cardModel?.id);
+
+        // 视觉反馈：点击时闪烁黄色
+        if (this.cardSprite) {
+            this.cardSprite.color = Color.YELLOW;
+            this.scheduleOnce(() => {
+                if (this.cardSprite) this.cardSprite.color = Color.WHITE;
+            }, 0.1);
+        }
+
         if (this._cardModel && this._onClickCallback && this._cardModel.isFaceUp) {
-            console.log('[CardView._onCardClick] 触发点击回调');
+            console.log(`[CardView._onCardClick] [${nodeName}] 符合点击条件，触发回调`);
             this._onClickCallback(this._cardModel.id);
         } else {
-            console.log('[CardView._onCardClick] 未触发回调, 原因:',
-                !this._cardModel ? '无cardModel' :
-                    !this._onClickCallback ? '无callback' :
-                        !this._cardModel.isFaceUp ? '卡牌背面朝上' : '未知');
+            console.log(`[CardView._onCardClick] [${nodeName}] 点击被忽略, 原因:`,
+                !this._cardModel ? '无数据' :
+                    !this._onClickCallback ? '无回调' :
+                        !this._cardModel.isFaceUp ? '背面朝上' : '未知');
         }
     }
 

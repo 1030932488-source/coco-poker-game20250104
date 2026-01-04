@@ -4,6 +4,12 @@
 
 这是一个基于 Cocos Creator 开发的纸牌消除游戏，采用 MVC 架构设计，实现了卡牌匹配、翻牌和回退等核心功能。
 
+## 🎮 游戏演示
+
+点击查看演示视频：[game_demo.mp4](demo.mp4)
+
+> 提示：如果无法直接播放，请下载后观看。
+
 ## 游戏规则
 
 ### 基本玩法
@@ -50,10 +56,12 @@ assets/
 ### 各层职责
 
 #### 1. Configs（配置层）
+
 - **职责**：管理静态配置数据
 - **示例**：`LevelConfig`（关卡配置）、`LevelConfigLoader`（配置加载器）
 
 #### 2. Models（数据模型层）
+
 - **职责**：存储运行时动态数据
 - **特点**：支持序列化和反序列化（用于存档）
 - **示例**：
@@ -62,6 +70,7 @@ assets/
   - `UndoModel`：回退操作模型
 
 #### 3. Views（视图层）
+
 - **职责**：UI显示和用户输入接收
 - **特点**：不包含业务逻辑，通过回调函数与控制器通信
 - **示例**：
@@ -72,15 +81,18 @@ assets/
   - `BaseCardView`：底牌视图
 
 #### 4. Controllers（控制器层）
+
 - **职责**：协调模型和视图，处理业务逻辑
 - **示例**：`GameController`：游戏主控制器
 
 #### 5. Managers（管理器层）
+
 - **职责**：提供全局性服务和功能，作为Controller的成员变量
 - **特点**：可持有Model数据，禁止单例模式
 - **示例**：`UndoManager`：回退管理器
 
 #### 6. Services（服务层）
+
 - **职责**：提供无状态的服务，处理业务逻辑
 - **特点**：不持有数据，通过参数操作数据，可单例或静态方法
 - **示例**：
@@ -94,6 +106,7 @@ assets/
 **实现位置**：`GameController._matchCard()`
 
 **流程**：
+
 1. 用户点击主牌区的卡牌
 2. `CardView` 捕获点击事件，通过回调通知 `GameController`
 3. `GameController` 使用 `CardMatchService.canMatch()` 判断是否可以匹配
@@ -104,6 +117,7 @@ assets/
    - 更新所有视图
 
 **代码原理**：
+
 ```typescript
 // 匹配判断逻辑（CardMatchService.ts）
 static canMatch(baseCard: CardModel, targetCard: CardModel): boolean {
@@ -119,6 +133,7 @@ static canMatch(baseCard: CardModel, targetCard: CardModel): boolean {
 **实现位置**：`GameController._flipStackCard()`
 
 **流程**：
+
 1. 检查主牌区是否有可匹配的牌
 2. 如果没有，找到备用牌堆最上面一张未翻开的牌
 3. 记录回退信息
@@ -126,6 +141,7 @@ static canMatch(baseCard: CardModel, targetCard: CardModel): boolean {
 5. 播放翻牌动画
 
 **代码原理**：
+
 ```typescript
 // 翻牌逻辑
 private _flipStackCard(card: CardModel): void {
@@ -147,6 +163,7 @@ private _flipStackCard(card: CardModel): void {
 **实现位置**：`UndoManager.undo()`
 
 **流程**：
+
 1. 用户点击回退按钮
 2. `GameView` 捕获点击，通知 `GameController`
 3. `GameController` 调用 `UndoManager.undo()`
@@ -157,6 +174,7 @@ private _flipStackCard(card: CardModel): void {
 6. 更新视图
 
 **代码原理**：
+
 ```typescript
 // 回退管理器使用栈结构存储操作记录
 private _undoStack: UndoModel[] = [];
@@ -170,6 +188,7 @@ public undo(gameModel: GameModel): boolean {
 ```
 
 **为什么使用栈结构**：
+
 - 后进先出（LIFO）特性符合回退操作的需求
 - 每次操作都记录完整的状态信息，便于精确恢复
 - 支持连续多次回退
@@ -205,6 +224,7 @@ public undo(gameModel: GameModel): boolean {
 ### 如何添加新的卡牌类型？
 
 1. **扩展枚举**（`CardEnums.ts`）：
+
 ```typescript
 export enum CardFaceType {
     // ... 现有枚举
@@ -212,12 +232,14 @@ export enum CardFaceType {
 }
 ```
 
-2. **更新模型**（`CardModel.ts`）：
+1. **更新模型**（`CardModel.ts`）：
+
 ```typescript
 // CardModel 已经支持任意 CardFaceType，无需修改
 ```
 
-3. **更新匹配规则**（`CardMatchService.ts`）：
+1. **更新匹配规则**（`CardMatchService.ts`）：
+
 ```typescript
 static canMatch(baseCard: CardModel, targetCard: CardModel): boolean {
     // 特殊处理小丑牌
@@ -231,6 +253,7 @@ static canMatch(baseCard: CardModel, targetCard: CardModel): boolean {
 ### 如何添加新的回退类型？
 
 1. **扩展枚举**（`UndoModel.ts`）：
+
 ```typescript
 export enum UndoActionType {
     // ... 现有类型
@@ -238,7 +261,8 @@ export enum UndoActionType {
 }
 ```
 
-2. **更新回退逻辑**（`UndoManager.ts`）：
+1. **更新回退逻辑**（`UndoManager.ts`）：
+
 ```typescript
 private _executeUndo(undoRecord: UndoModel, gameModel: GameModel): boolean {
     switch (undoRecord.actionType) {
@@ -250,7 +274,8 @@ private _executeUndo(undoRecord: UndoModel, gameModel: GameModel): boolean {
 }
 ```
 
-3. **在 Controller 中记录**（`GameController.ts`）：
+1. **在 Controller 中记录**（`GameController.ts`）：
+
 ```typescript
 // 使用特殊卡牌时
 const undoModel = new UndoModel(
@@ -297,4 +322,3 @@ this._undoManager.addUndoRecord(undoModel);
 ## 许可证
 
 MIT License
-

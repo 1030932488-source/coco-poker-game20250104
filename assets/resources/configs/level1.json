@@ -5,31 +5,31 @@
             "CardSuit": 0,
             "Position": {
                 "x": 0,
-                "y": 400
+                "y": 200
             }
         },
         {
             "CardFace": 2,
             "CardSuit": 0,
             "Position": {
-                "x": -100,
-                "y": 200
+                "x": -60,
+                "y": 50
             }
         },
         {
             "CardFace": 2,
             "CardSuit": 1,
             "Position": {
-                "x": 100,
-                "y": 200
+                "x": 60,
+                "y": 50
             }
         },
         {
             "CardFace": 2,
             "CardSuit": 0,
             "Position": {
-                "x": -200,
-                "y": 0
+                "x": -120,
+                "y": -100
             }
         },
         {
@@ -37,15 +37,15 @@
             "CardSuit": 0,
             "Position": {
                 "x": 0,
-                "y": 0
+                "y": -100
             }
         },
         {
             "CardFace": 1,
             "CardSuit": 3,
             "Position": {
-                "x": 200,
-                "y": 0
+                "x": 120,
+                "y": -100
             }
         }
     ],
